@@ -16,10 +16,10 @@ app.set('views', __dirname + '/views');
 app.get('/', (req, res) => {
     // console.log(__dirname);
     //res.sendFile( __dirname + '/views/index.html')
-    res.render('index');
+    res.render('index', {title: 'this is the page title', content: 'this is the page content<br/> this is FBW3 LEI'});
 });
 
-app.get('/bla', (req, res) => {
+app.get('/contact', (req, res) => {
     res.render('contact')
 })
 

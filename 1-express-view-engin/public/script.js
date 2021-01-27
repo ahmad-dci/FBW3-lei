@@ -1,3 +1,3 @@
-window.onload = () => {
-    document.body.style.backgroundColor = 'red';
-}
+// window.onload = () => {
+//     document.body.style.backgroundColor = 'red';
+// }

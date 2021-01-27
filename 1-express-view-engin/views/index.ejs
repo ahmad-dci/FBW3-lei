@@ -11,10 +11,19 @@
     </fieldset>
     <div>
         <%-content %>
+        <br>
+        <ul>
+            <!-- <li>one</li>
+            <li>two</li>
+            <li>three</li> -->
+
+            <% for(let i = 0; i < fruits.length ; i++){ %>
+                <li> <%=fruits[i]%> </li>
+            <%}%>
+        </ul>
     </div>
-    <fieldset>
-        <h2>Footer</h2>
-    </fieldset>
+    
+    <%- include('partials/footer')%>
 
 </body>
 </html>

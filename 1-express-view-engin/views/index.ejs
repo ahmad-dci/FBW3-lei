@@ -6,9 +6,11 @@
     <title>Main Page</title>
 </head>
 <body>
-    <fieldset>
-        <h1> <%=title %> </h1>
-    </fieldset>
+    
+    <!-- include partial view with parameteter -->
+    <%- include('partials/header', {title, pageName: 'Home'})%>
+
+
     <div>
         <%-content %>
         <br>

@@ -13,7 +13,22 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/', (req, res) =>{
     res.render('index');
-})
+});
+
+app.get('/about', (req, res) =>{
+    res.render('about');
+});
+
+app.get('/blog', (req, res) =>{
+    res.render('blog');
+});
+app.get('/contact', (req, res) =>{
+    res.render('contact');
+});
+
+app.get('/marketing', (req, res) =>{
+    res.render('marketing');
+});
 
 app.listen(port, () => {
     console.log(`App is listening to port ${port}`);

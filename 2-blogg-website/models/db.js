@@ -30,6 +30,10 @@ const commentSchema = new Schema({
 const Comment = mongoose.model('comments', commentSchema);
 
 // function to connect to database
+
+/**
+ * connect function used to make sure that the connection is opend with database
+ */
 function connect() {
     return new Promise((resolve, reject) => {
         if(mongoose.connection.readyState === 1) {
@@ -69,17 +73,38 @@ function addComment(name, email, comment, commentDate) {
             // save data to database
             newComment.save().then(result => {
                 console.log(result);
-                resolve()
+                resolve();
             }).catch(error => {
-                reject(error)
+                reject(error);
             })
         }).catch(error => {
-            reject(error)
+            reject(error);
         })
     })
 }
-// export addComment to be used outside
+
+/**
+ * get all comments from database
+ */
+function getComments() {
+    return new Promise((resolve, reject) => {
+        // first connect to data base
+        connect().then(() => {
+            Comment.find().then(comments => {
+                resolve(comments);
+        }).catch(error => {
+            reject(error);
+        })
+        }).catch(error => {
+            reject(error);
+        })
+        
+    })
+}
+
+// export addComment,getComments  to be used outside
 module.exports = {
-    addComment
+    addComment,
+    getComments
 }
 

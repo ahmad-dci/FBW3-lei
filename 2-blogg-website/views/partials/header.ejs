@@ -20,19 +20,19 @@
                 <div class="limit-box">
                    <nav class="main-menu">
                       <ul class="menu-area-main">
-                         <li class="active">
+                         <li class="<%= page === 'home' ? 'active' : ''%>">
                             <a href="/">Home</a>
                          </li>
-                         <li>
+                         <li class="<%= page === 'about' ? 'active' : ''%>">
                             <a href="/about">About</a>
                          </li>
-                         <li>
+                         <li class="<%= page === 'marketing' ? 'active' : ''%>">
                             <a href="/marketing">Marketing</a>
                          </li>
-                         <li>
+                         <li class="<%= page === 'blog' ? 'active' : ''%>">
                             <a href="/blog">Blog</a>
                          </li>
-                         <li>
+                         <li class="<%= page === 'contact' ? 'active' : ''%>">
                             <a href="/contact">Contact us</a>
                          </li>
                          <li>

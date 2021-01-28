@@ -4,6 +4,12 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
+// use express body parser to get the sent posted [POST] data from any form or fetch uses dataform
+app.use(express.urlencoded({extended: true}));
+// use express json methond to lett the app read any sent json data usualy from fetch
+app.use(express.json());
+
+
 // set Ejs configuration
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -22,6 +28,13 @@ app.get('/about', (req, res) =>{
 app.get('/blog', (req, res) =>{
     res.render('blog');
 });
+
+app.post('/blog', (req, res) =>{
+    console.log(req.body);
+    res.render('blog');
+});
+
+
 app.get('/contact', (req, res) =>{
     res.render('contact');
 });

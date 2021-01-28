@@ -29,14 +29,25 @@ app.get('/about', (req, res) =>{
 });
 
 app.get('/blog', (req, res) =>{
-    res.render('blog');
+    db.getComments().then(comments => {
+        res.render('blog', {comments});
+    }).catch(error => {
+        res.render('blog', {comments: []});
+    });
+    
 });
 
 app.post('/blog', (req, res) =>{
     console.log(req.body);
     //res.render('blog');
     db.addComment(req.body.name, req.body.email, req.body.comment, Date.now()).then(() => {
-        res.render('blog')
+
+        db.getComments().then(comments => {
+            res.render('blog', {comments});
+        }).catch(error => {
+            res.render('blog', {comments: []});
+        });
+
     }).catch(error => {
         res.send('there were errors on saving your comment ' + error.message);
     })

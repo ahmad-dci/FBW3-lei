@@ -1,5 +1,8 @@
 const express = require('express');
 
+// require db model to use database function
+const db = require('./models/db');
+
 const app = express();
 
 const port = process.env.PORT || 3000;
@@ -31,7 +34,12 @@ app.get('/blog', (req, res) =>{
 
 app.post('/blog', (req, res) =>{
     console.log(req.body);
-    res.render('blog');
+    //res.render('blog');
+    db.addComment(req.body.name, req.body.email, req.body.comment, Date.now()).then(() => {
+        res.render('blog')
+    }).catch(error => {
+        res.send('there were errors on saving your comment ' + error.message);
+    })
 });
 
 

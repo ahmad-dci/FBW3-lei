@@ -48,7 +48,7 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="heading" style="padding-left: 15px;padding-right: 15px;">
-                     <h4 style="border-bottom: solid #333 1px;">Comments / 2</h4>
+                     <h4 style="border-bottom: solid #333 1px;">Comments / <%=comments.length%></h4>
                   </div>
                </div>
             </div>
@@ -82,7 +82,7 @@
                         <div class="col-md-9">
                            <div class="full contact_text">
                               <h3><%=comments[i].name%></h3>
-                              <h4>Posted on <%=comments[i].commentDate%></h4>
+                              <h4>Posted on <%=comments[i].commentDate.toLocaleDateString("en-US") +" at " + comments[i].commentDate.toLocaleTimeString("en-US")%></h4>
                               <p>
                                  <%=comments[i].comment%>
                               </p>
@@ -137,5 +137,12 @@
       
       <%- include('partials/footer')%>
       <%- include('partials/scripts')%>
+
+
+      <script>
+         if ( window.history.replaceState ) {
+           window.history.replaceState( null, null, window.location.href );
+         }
+         </script>
    </body>
 </html>

@@ -45,6 +45,10 @@ const userSchema = new Schema({
         type: String
     }
 });
+
+// userSchema.pre('update', function( next ) {
+//     this.update({}, { $inc: { __v: 1 } }, next );
+//   });
 // create User mongoose model
 const User = mongoose.model('users', userSchema);
 

@@ -80,7 +80,6 @@ app.post('/register', (req, res) => {
         res.send(error.message)
     })
 
-    res.send('you are registered');
 });
 
 app.listen(port, () => {

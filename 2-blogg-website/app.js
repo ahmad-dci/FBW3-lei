@@ -77,7 +77,12 @@ app.post('/register', (req, res) => {
     db.registerUser(fName, lName, email, password).then(() => {
         res.send('you are registered');
     }).catch(error => {
-        res.send(error.message)
+        if (error.code === 11000){
+            res.send("this email is already registered")
+        } else {
+            res.send(error.message)
+        }
+        
     })
 
 });

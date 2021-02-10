@@ -7,10 +7,24 @@
             <!-- section -->
             <div class="section layout_padding">
                 <div class="container">
-                    <div class="row">
+                    <form id="loginForm" method="POST" action="/login">
+                        <div class="form-row">
 
-                        Login Page
-                    </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail">Email</label>
+                                <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email" required>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword">Password</label>
+                                <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" required>
+                            </div>
+
+
+                        </div>
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Login</button>
+                    </form>
                 </div>
             </div>
             <%- include('partials/footer')%>

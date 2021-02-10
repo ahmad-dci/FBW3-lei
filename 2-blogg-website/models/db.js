@@ -167,10 +167,39 @@ function registerUser (fname, lname, email, password){
         })
     })
 }
+
+
+function checkUser(email, password) {
+    // error 2: user is not exist
+    // error 3: user entered wrong password
+    return new Promise((resolve, reject) => {
+        connect().then(() => {
+            User.findOne({email}).then(data => {
+                if(!data) {
+                    reject(2);
+                } else {
+                    bcrypt.compare(password, data.password, (err, result) => {
+                        if(result) {
+                            resolve();
+                        } else {
+                            reject(3);
+                        }
+                    })
+                }
+            }).catch(error => {
+                reject(error);
+            })
+        }).catch(error => {
+            reject(error);
+        })
+    })
+}
+
 // export addComment,getComments  to be used outside
 module.exports = {
     addComment,
     getComments,
-    registerUser
+    registerUser,
+    checkUser
 }
 

@@ -10,24 +10,57 @@
             <div class="section layout_padding">
                 <div class="container">
 
-                        <form>
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
+                    <form id="registerForm">
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6">
                                 <label for="inputfName">First Name</label>
-                                <input type="text" class="form-control" id="inputfName" placeholder="First Name">
-                              </div>
-                              <div class="form-group col-md-6">
-                                <label for="inputLname">Last Name</label>
-                                <input type="text" class="form-control" id="inputLname" placeholder="Last Name">
-                              </div>
+                                <input type="text" class="form-control" id="inputfName" placeholder="First Name" required>
                             </div>
-                            
-                            <button type="submit" class="btn btn-primary">Register</button>
-                          </form>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputLname">Last Name</label>
+                                <input type="text" class="form-control" id="inputLname" placeholder="Last Name" required>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label for="inputEmail">Email</label>
+                                <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword">Password</label>
+                                <input type="password" class="form-control" id="inputPassword" placeholder="password" required>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputrePassword">Re-Password</label>
+                                <input type="password" class="form-control" id="inputrePassword" placeholder="password" required>
+                            </div>
+
+                        </div>
+
+
+
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Register</button>
+                    </form>
                 </div>
             </div>
             <%- include('partials/footer')%>
                 <%- include('partials/scripts')%>
+
+                <script>
+                    document.querySelector('#submitBtn').addEventListener('click', e => {
+                        e.preventDefault();
+                        const pass = document.querySelector('#inputPassword').value;
+                        const repass = document.querySelector('#inputrePassword').value;
+                        if (pass !== repass) {
+                            alert("password dose not match the re password");
+                        } else {
+                            document.querySelector('#registerForm').submit();
+                        }
+                    })
+                </script>
     </body>
 
 </html>

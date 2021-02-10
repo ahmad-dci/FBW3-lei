@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const connectionString = 'mongodb+srv://user1:!234qweR@cluster0.rmrmn.mongodb.net/fbw3lei?retryWrites=true&w=majority';
 
@@ -141,17 +142,26 @@ function registerUser (fname, lname, email, password){
     return new Promise((resolve, reject) => {
         connect().then(() => {
 
-            const newUser = new User({
-                lName: lname,
-                fName: fname,
-                email,
-                password
-            });
-            newUser.save().then((data) => {
-                resolve(data);
-            }).catch(error => {
-                reject(error);
+            // const bcrypt = require('bcrypt');
+            bcrypt.hash(password, 10, (err, hashedPass) => {
+                if (err){
+                    reject(err);
+                } else {
+                    const newUser = new User({
+                        lName: lname,
+                        fName: fname,
+                        email,
+                        password: hashedPass
+                    });
+                    newUser.save().then((data) => {
+                        resolve(data);
+                    }).catch(error => {
+                        reject(error);
+                    })
+                }
             })
+
+            
         }).catch(error => {
             reject(error)
         })

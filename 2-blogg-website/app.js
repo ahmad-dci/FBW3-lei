@@ -67,7 +67,24 @@ app.get('/login', (req, res) =>{
 });
 
 app.post('/login', (req, res) => {
-    
+    const {email, password} = req.body;
+    db.checkUser(email, password).then(() => {
+        res.send('you are logged in');
+    }).catch(error => {
+        switch (error) {
+            case 2:
+                res.send('user is not exist');
+                break;
+            case 3:
+                res.send('Wrong password');
+                 break;
+            default:
+                res.send(error.message);
+                break;
+        }
+            
+        
+    })
 });
 
 

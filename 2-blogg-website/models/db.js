@@ -25,6 +25,30 @@ const commentSchema = new Schema({
     }
 });
 
+// create user Schema
+const userSchema = new Schema({
+    lName: {
+        required: true,
+        type: String
+    },
+    fName: {
+        required: true,
+        type: String
+    },
+    email: {
+        required: true,
+        type: String,
+        unique: true
+    },
+    password: {
+        required: true,
+        type: String
+    }
+});
+// create User mongoose model
+const User = mongoose.model('users', userSchema);
+
+
 // connect commentSchema with the collection comments on database 
 // we will get a module that we can use to interact with database
 const Comment = mongoose.model('comments', commentSchema);
@@ -102,9 +126,37 @@ function getComments() {
     })
 }
 
+/**
+ * save user data to database
+ * @param {String} lname 
+ * @param {String} fname 
+ * @param {String} email 
+ * @param {String} password 
+ */
+function registerUser (fname, lname, email, password){
+    return new Promise((resolve, reject) => {
+        connect().then(() => {
+
+            const newUser = new User({
+                lName: lname,
+                fName: fname,
+                email,
+                password
+            });
+            newUser.save().then((data) => {
+                resolve(data);
+            }).catch(error => {
+                reject(error);
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
 // export addComment,getComments  to be used outside
 module.exports = {
     addComment,
-    getComments
+    getComments,
+    registerUser
 }
 

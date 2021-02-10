@@ -66,8 +66,21 @@ app.get('/login', (req, res) =>{
     res.render('login');
 });
 
-app.get('/register/', (req, res) =>{
+app.get('/register', (req, res) =>{
     res.render('register');
+});
+
+app.post('/register', (req, res) => {
+    console.log(req.body);
+
+    const {fName, lName, email, password} = req.body;
+    db.registerUser(fName, lName, email, password).then(() => {
+        res.send('you are registered');
+    }).catch(error => {
+        res.send(error.message)
+    })
+
+    res.send('you are registered');
 });
 
 app.listen(port, () => {
